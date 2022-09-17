@@ -1,0 +1,35 @@
+﻿<p>
+    <b>Name</b> : <b>@contact.first_name @contact.last_name</b><br>
+    
+    @if (displayEmail)
+    {
+        <b>Email :</b> <span>@contact.email</span><br />
+    }
+
+    <b>Gender</b> : <span>@contact.gender</span><br />
+    <b>Created At</b> : <span>@contact.created_at</span><br />
+
+    @if (displayInfo)
+    {
+        <span class="text-info fw-bold small">
+            The email address of <b>@contact.first_name @contact.last_name</b> is @contact.email
+        </span>
+    }
+    <div class="d-block">
+        <button type="button" class="btn btn-sm btn-info" @onclick="@(() => { displayInfo = !displayInfo; })">Show Info</button>
+        <button type="button" class="btn btn-sm btn-danger ms-1" @onclick="@(() => deleteRowContact.InvokeAsync(contact) )">Delete</button>
+    </div>
+</p>
+
+@code {
+    [Parameter]
+    public Contact contact { get; set; }
+
+    [Parameter]
+    public bool displayEmail { get; set; }
+
+    [Parameter]
+    public EventCallback<Contact> deleteRowContact { get; set; }
+
+    private bool displayInfo = false;
+}

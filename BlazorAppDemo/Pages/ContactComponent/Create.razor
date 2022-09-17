@@ -1,0 +1,16 @@
+﻿@page "/contact/create"
+
+@inject NavigationManager navManager
+
+<h3>Create Contact</h3>
+
+<button type="button" class="btn btn-sm btn-secondary" @onclick="backToContact">
+    <i class="oi oi-arrow-left"></i> Back
+</button>
+
+@code {
+    private void backToContact()
+    {
+        navManager.NavigateTo("/contact");
+    }
+}

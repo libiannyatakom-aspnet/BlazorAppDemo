@@ -1,0 +1,14 @@
+﻿@page "/contact"
+
+@using BlazorAppDemo.Pages.ContactComponent
+
+<h1>Contact Page</h1>
+
+<ContactList contacts="contacts">
+    <NullContacts>
+        <span class="d-block">Loading...</span>
+    </NullContacts>
+    <EmptyContacts>
+        <span class="d-block">No data to display</span>
+    </EmptyContacts>
+</ContactList>

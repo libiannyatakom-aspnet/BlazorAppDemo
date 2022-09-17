@@ -1,0 +1,60 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, @getFullName()</h1>
+<button type="button" class="btn btn-sm btn-primary" @onclick="@(() => { firstName = "Libian"; lastName = "Nyata"; })">Real Name</button>
+<button type="button" class="btn btn-sm btn-primary" @onclick="changeName">Change Name</button>
+<br />
+Welcome to your new app.
+<div>2 + 2 = @(2+2)</div>
+<div>2 + 2 = @getSum()</div>
+
+<div class="mt-2">
+    @for(int i = 0; i <= 5; i++) {
+        <p>Name = @((MarkupString)names[i])</p>
+    }
+</div>
+<div class="mt-2">
+    @foreach(var name in names) {
+        <p>Name : @name</p>
+    }
+</div>
+
+@code {
+    private string firstName = "Libian";
+    private string lastName = "Bie";
+    private List<string> names;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        names = new List<string>{
+            "<b>Libian</b>",
+            "Pini",
+            "Adnan",
+            "Ali",
+            "<i>Marisa</i>",
+            "<u>Yola</u>"
+        };
+    }
+
+    private string getFullName()
+    {
+        if(lastName != "") {
+            return firstName + " " + lastName;
+        }
+        return firstName;
+    }
+
+    private void changeName()
+    {
+        firstName = "Libie";
+        lastName = "Real";
+    }
+
+    private int getSum()
+    {
+        return 2 + 2;
+    }
+}

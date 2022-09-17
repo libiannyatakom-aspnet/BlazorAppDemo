@@ -1,0 +1,72 @@
+﻿@page "/contact1"
+
+@using BlazorAppDemo.Pages.ContactComponent
+@inject NavigationManager navManager
+
+<h3>Contact Index</h3>
+
+<button type="button" class="btn btn-sm btn-primary" @onclick="createForm">Create</button>
+<br />
+<input type="checkbox" id="displayEmail" name="displayEmail" @onchange="@(() => { displayEmail = !displayEmail; })" />
+<label for="displayEmail">Display Email</label>
+<br />
+<input type="checkbox" id="displayEmail" name="displayEmail" @bind="displayEmail" />
+<label for="displayEmail">Display Email (Recomended)</label>
+<br />
+<br />
+@foreach (var value in contacts)
+{
+    @*<p>
+        Name : <b>@value.first_name @value.last_name</b><br>
+        Email : <span>@value.email</span><br>
+        Gender : <span>@value.gender</span>
+    </p>*@
+    @*<Contact01 
+        first_name="@value.first_name"
+        last_name="@value.last_name"
+        email="@value.email"
+        gender="@value.gender" />*@
+
+    @*<Contact02 contact="value" />*@
+
+    <Contact03 contact="value" displayEmail="@displayEmail" deleteRowContact="deleteContact" />
+    <hr />
+}
+
+@code {
+    private bool displayEmail = false;
+
+    private List<Contact> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<Contact> {
+            new Contact {
+                first_name = "Libian",
+                last_name = "Nyata",
+                email = "libiannyatakom@gmail.com",
+                gender = "M",
+                created_at = DateTime.Now
+            },
+            new Contact {
+                first_name = "Adnan",
+                last_name = "Aditya Pradipta",
+                email = "adnan@gmail.com",
+                gender = "M",
+                created_at = DateTime.Now.AddMinutes(3)
+            }
+        };
+    }
+
+    private void deleteContact(Contact contact)
+    {
+        contacts.Remove(contact);
+    }
+
+    private void createForm()
+    {
+        navManager.NavigateTo("/contact/create");
+    }
+}

@@ -1,0 +1,10 @@
+﻿<p>
+    Name : <b>@contact.first_name @contact.last_name</b><br>
+    Email : <span>@contact.email</span><br>
+    Gender : <span>@contact.gender</span>
+</p>
+
+@code {
+    [Parameter]
+    public Contact contact { get; set; }
+}
