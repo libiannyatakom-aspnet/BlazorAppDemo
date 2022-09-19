@@ -1,0 +1,58 @@
+﻿@page "/contactdemo"
+
+@using BlazorAppDemo.Pages.ContactComponent
+@using BlazorAppDemo.Services
+@inject ContactService contactService
+
+<h3>ContactDemo01</h3>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-2">
+                <label class="form-label">First Name</label>
+                <input type="text" @bind="first_name" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Last Name</label>
+                <input type="text" @bind="last_name" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Email</label>
+                <input type="text" @bind="email" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Gender</label>
+                <select @bind="gender" class="form-control form-control-sm">
+                    <option value="">--</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Age</label>
+                <input type="number" @bind="age" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-2">
+                <button type="submit" class="btn btn-sm btn-primary" @onclick="addContact">Add Contact</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (contactService.contactList is null)
+            {
+                <span class="d-block">Loading...</span>
+            }
+            else if (contactService.contactList.Count == 0)
+            {
+                <span class="d-block">No data to display</span>
+            }
+            else
+            {
+                @foreach (var value in contactService.contactList)
+                {
+                    <Contact03 contact="value" displayEmail="@displayEmail" deleteRowContact="deleteContact" />
+                }
+            }
+        </div>
+    </div>
+</div>
